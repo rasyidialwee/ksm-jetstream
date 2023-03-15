@@ -2,7 +2,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 const props = defineProps({
-    ceremonies: Object,
+    ceremonies: { type: Object, default: {} },
 });
 </script>
 
