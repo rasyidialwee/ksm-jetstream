@@ -43,8 +43,10 @@ class ApiCeremonyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Ceremony $ceremony)
     {
-        //
+        $ceremony->delete();
+
+        return $ceremony->name . ' DELETED.';
     }
 }

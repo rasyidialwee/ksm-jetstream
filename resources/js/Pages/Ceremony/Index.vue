@@ -1,10 +1,12 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 
-const props = defineProps({
-    ceremonies: { type: Object, default: {} },
-});
+// const props = defineProps({
+//     ceremonies: { type: Object, default: {} },
+// });
+
+const ceremonies = ref({});
 
 function getCeremonies() {
     axios
@@ -12,6 +14,7 @@ function getCeremonies() {
         .then((resp) => {
             //executed when request complete
             console.log("ceremonies", resp);
+            ceremonies.value = resp.data;
         })
         .catch((err) => {
             // executed when response is error
@@ -20,6 +23,40 @@ function getCeremonies() {
         .finally(() => {
             //always executed
             console.log("end");
+        });
+}
+
+function changePage(url) {
+    axios
+        .get(url)
+        .then((resp) => {
+            //executed when request complete
+            console.log("ceremonies", resp);
+            ceremonies.value = resp.data;
+        })
+        .catch((err) => {
+            // executed when response is error
+            console.error("err", err);
+        })
+        .finally(() => {
+            //always executed
+            console.log("end");
+        });
+}
+
+function remove(ceremony) {
+    axios
+        .delete(route("api.ceremonies.destroy", ceremony))
+        .then((resp) => {
+            console.log("deleted", resp);
+        })
+        .catch((err) => {
+            // executed when response is error
+            console.error("err", err);
+        })
+        .finally(() => {
+            //always executed
+            getCeremonies();
         });
 }
 
@@ -47,6 +84,7 @@ onMounted(() => {
                                 <th>Gambar</th>
                                 <th>Tarikh dan Masa Mula</th>
                                 <th>Tarikh dan Masa Tamat</th>
+                                <th>::</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,23 +99,30 @@ onMounted(() => {
                                 </td>
                                 <td>{{ ceremony.start_date }}</td>
                                 <td>{{ ceremony.end_date }}</td>
+                                <td>
+                                    <Button
+                                        label="Delete"
+                                        severity="danger"
+                                        @click.prevent="remove(ceremony)"
+                                    />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
 
                     <span class="p-buttonset">
-                        <a
-                            v-if="ceremonies.prev_page_url"
-                            :href="ceremonies.prev_page_url"
-                        >
-                            <Button label="Prev" />
-                        </a>
-                        <a
-                            v-if="ceremonies.next_page_url"
-                            :href="ceremonies.next_page_url"
-                        >
-                            <Button label="Next" />
-                        </a>
+                        <Button
+                            label="Prev"
+                            @click.prevent="
+                                changePage(ceremonies.prev_page_url)
+                            "
+                        />
+                        <Button
+                            label="Next"
+                            @click.prevent="
+                                changePage(ceremonies.next_page_url)
+                            "
+                        />
                     </span>
                 </div>
             </div>

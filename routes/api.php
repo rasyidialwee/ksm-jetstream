@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/ceremonies', [ApiCeremonyController::class, 'index'])->name('ceremony.index');
+    Route::delete('/ceremonies/{ceremony}', [ApiCeremonyController::class, 'destroy'])->name('ceremonies.destroy');
 });
