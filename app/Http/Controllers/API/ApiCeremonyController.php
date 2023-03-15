@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ceremony;
 use Illuminate\Http\Request;
 
 class ApiCeremonyController extends Controller
@@ -12,7 +13,7 @@ class ApiCeremonyController extends Controller
      */
     public function index()
     {
-        //
+        return Ceremony::simplePaginate(10);
     }
 
     /**

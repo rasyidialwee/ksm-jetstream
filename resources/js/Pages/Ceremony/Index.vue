@@ -1,8 +1,30 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { onMounted } from "vue";
 
 const props = defineProps({
     ceremonies: { type: Object, default: {} },
+});
+
+function getCeremonies() {
+    axios
+        .get(route("api.ceremony.index"))
+        .then((resp) => {
+            //executed when request complete
+            console.log("ceremonies", resp);
+        })
+        .catch((err) => {
+            // executed when response is error
+            console.error("err", err);
+        })
+        .finally(() => {
+            //always executed
+            console.log("end");
+        });
+}
+
+onMounted(() => {
+    getCeremonies();
 });
 </script>
 
