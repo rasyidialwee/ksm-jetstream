@@ -42,25 +42,21 @@ const props = defineProps({
                             </tr>
                         </tbody>
                     </table>
-                    <!-- <ul>
-                        <li
-                            v-for="(ceremony, index) in ceremonies.data"
-                            :key="index"
+
+                    <span class="p-buttonset">
+                        <a
+                            v-if="ceremonies.prev_page_url"
+                            :href="ceremonies.prev_page_url"
                         >
-                            {{ ceremony.name }}
-                        </li>
-                    </ul> -->
-                    =========================================
-                    <a
-                        v-if="ceremonies.prev_page_url"
-                        :href="ceremonies.prev_page_url"
-                        >Prev</a
-                    >
-                    <a
-                        v-if="ceremonies.next_page_url"
-                        :href="ceremonies.next_page_url"
-                        >Next</a
-                    >
+                            <Button label="Prev" />
+                        </a>
+                        <a
+                            v-if="ceremonies.next_page_url"
+                            :href="ceremonies.next_page_url"
+                        >
+                            <Button label="Next" />
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>
