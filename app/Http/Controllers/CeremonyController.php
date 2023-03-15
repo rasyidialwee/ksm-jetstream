@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ceremony;
 use App\Http\Requests\StoreCeremonyRequest;
 use App\Http\Requests\UpdateCeremonyRequest;
+use Inertia\Inertia;
 
 class CeremonyController extends Controller
 {
@@ -13,7 +14,10 @@ class CeremonyController extends Controller
      */
     public function index()
     {
-        //
+        $ceremonies = Ceremony::simplePaginate(10);
+        return inertia('Ceremony/Index', [
+            'ceremonies' => $ceremonies,
+        ]);
     }
 
     /**
