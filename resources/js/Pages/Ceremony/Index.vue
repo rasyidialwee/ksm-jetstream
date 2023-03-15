@@ -10,7 +10,7 @@ const ceremonies = ref({});
 
 function getCeremonies() {
     axios
-        .get(route("api.ceremony.index"))
+        .get(route("api.ceremonies.index"))
         .then((resp) => {
             //executed when request complete
             console.log("ceremonies", resp);
