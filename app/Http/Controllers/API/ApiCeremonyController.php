@@ -21,7 +21,25 @@ class ApiCeremonyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image_names' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+
+        $ceremony = new Ceremony();
+        $ceremony->name = $request->name;
+        $ceremony->description = $request->description;
+        $ceremony->image_name = $request->image_name;
+        $ceremony->start_date = $request->start_date;
+        $ceremony->end_date = $request->end_date;
+        $ceremony->save();
+
+        return $ceremony;
     }
 
     /**

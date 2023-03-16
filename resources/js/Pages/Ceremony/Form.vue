@@ -12,6 +12,21 @@ const form = reactive({
 
 function submit() {
     console.log("form", form);
+    axios
+        .post(route("api.ceremonies.store", form))
+        .then((resp) => {
+            //executed when request complete
+            console.log("data berjaya dimasukkan", resp);
+        })
+        .catch((err) => {
+            if (err.response.status === 422) {
+                console.log("errors", err.response.data.errors);
+            }
+        })
+        .finally(() => {
+            //always executed
+            console.log("end");
+        });
 }
 </script>
 
@@ -26,11 +41,6 @@ function submit() {
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                    <div>
-                        <label for="">Name</label>
-                        <input type="text" v-model="form.name" />
-                    </div>
-
                     <div>
                         <label for="">Name</label>
                         <input type="text" v-model="form.name" />
