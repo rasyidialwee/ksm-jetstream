@@ -23,12 +23,15 @@ class ApiCeremonyController extends Controller
     {
         // dd($request->all());
 
+        //validation with custom errors.
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'image_names' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+        ], [
+            'name.required' => 'Nama diperlukan.'
         ]);
 
         $ceremony = new Ceremony();
