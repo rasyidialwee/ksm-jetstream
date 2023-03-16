@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 
 const form = reactive({
     name: null,
@@ -9,6 +9,8 @@ const form = reactive({
     start_date: null,
     end_date: null,
 });
+
+const errors = ref({});
 
 function submit() {
     console.log("form", form);
@@ -20,7 +22,7 @@ function submit() {
         })
         .catch((err) => {
             if (err.response.status === 422) {
-                console.log("errors", err.response.data.errors);
+                errors.value = err.response.data.errors;
             }
         })
         .finally(() => {
@@ -37,6 +39,12 @@ function submit() {
                 Tambah Ceremony
             </h2>
         </template>
+
+        <div v-for="(error, index) in errors" :key="index" class="my-3">
+            <div v-for="(message, index) in error" :key="index">
+                <p>{{ message }}</p>
+            </div>
+        </div>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
