@@ -17,9 +17,16 @@ class CeremonyController extends Controller
         return inertia('Ceremony/Index');
     }
 
-    public function form()
+    public function create()
     {
         return inertia('Ceremony/Form');
+    }
+
+    public function edit(Ceremony $ceremony)
+    {
+        return inertia('Ceremony/Form', [
+            'ceremony' => $ceremony
+        ]);
     }
 
 

@@ -42,6 +42,7 @@ Route::middleware([
         ->name('ceremonies.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/form', 'form')->name('form');
+            Route::get('/create', 'create')->name('create');
+            Route::get('{ceremony}/edit', 'edit')->name('edit');
         });
 });

@@ -67,7 +67,9 @@ onMounted(() => {
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Senarai Ceremony
             </h2>
-            <a :href="route('ceremonies.form')"> <Button label="Tambah" /> </a>
+            <a :href="route('ceremonies.create')">
+                <Button label="Tambah" />
+            </a>
         </template>
 
         <div class="py-12">
@@ -102,6 +104,16 @@ onMounted(() => {
                                         severity="danger"
                                         @click.prevent="remove(ceremony)"
                                     />
+                                    <a
+                                        :href="
+                                            route('ceremonies.edit', ceremony)
+                                        "
+                                    >
+                                        <Button
+                                            label="Edit"
+                                            severity="warning"
+                                        />
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
