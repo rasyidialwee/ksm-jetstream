@@ -1,6 +1,8 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { ref, reactive } from "vue";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 
 const props = defineProps({
     ceremony: {
@@ -16,6 +18,16 @@ const form = reactive({
     start_date: props.ceremony ? props.ceremony.start_date : null,
     end_date: props.ceremony ? props.ceremony.end_date : null,
 });
+
+const rules = {
+    name: { required },
+    description: { required },
+    image_name: { required },
+    start_date: { required },
+    end_date: { required },
+};
+
+const v$ = useVuelidate(rules, form, { $autoDirty: true });
 
 const errors = ref({});
 
@@ -80,11 +92,27 @@ function update() {
                     <div>
                         <label for="">Name</label>
                         <input type="text" v-model="form.name" />
+                        <div v-if="v$.name.$invalid">
+                            <p
+                                v-for="(error, index) in v$.name.$errors"
+                                :key="index"
+                            >
+                                {{ error.$message }}
+                            </p>
+                        </div>
                     </div>
 
                     <div>
                         <label for="">Description</label>
                         <input type="text" v-model="form.description" />
+                        <div v-if="v$.description.$invalid">
+                            <p
+                                v-for="(error, index) in v$.description.$errors"
+                                :key="index"
+                            >
+                                {{ error.$message }}
+                            </p>
+                        </div>
                     </div>
 
                     <div>
