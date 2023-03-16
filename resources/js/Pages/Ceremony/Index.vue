@@ -2,10 +2,6 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { ref, onMounted } from "vue";
 
-// const props = defineProps({
-//     ceremonies: { type: Object, default: {} },
-// });
-
 const ceremonies = ref({});
 
 function getCeremonies() {
@@ -71,6 +67,7 @@ onMounted(() => {
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Senarai Ceremony
             </h2>
+            <a :href="route('ceremonies.form')"> <Button label="Tambah" /> </a>
         </template>
 
         <div class="py-12">

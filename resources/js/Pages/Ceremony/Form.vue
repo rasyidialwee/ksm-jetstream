@@ -1,0 +1,64 @@
+<script setup>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import { reactive } from "vue";
+
+const form = reactive({
+    name: null,
+    description: null,
+    image_name: null,
+    start_date: null,
+    end_date: null,
+});
+
+function submit() {
+    console.log("form", form);
+}
+</script>
+
+<template>
+    <AppLayout title="Dashboard">
+        <template #header>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                Tambah Ceremony
+            </h2>
+        </template>
+
+        <div class="py-12">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+                    <div>
+                        <label for="">Name</label>
+                        <input type="text" v-model="form.name" />
+                    </div>
+
+                    <div>
+                        <label for="">Name</label>
+                        <input type="text" v-model="form.name" />
+                    </div>
+
+                    <div>
+                        <label for="">Description</label>
+                        <input type="text" v-model="form.description" />
+                    </div>
+
+                    <div>
+                        <label for="">Image</label>
+                        <input type="text" v-model="form.image_name" />
+                    </div>
+
+                    <div>
+                        <label for="">Start Date</label>
+                        <input type="date" v-model="form.start_date" />
+                    </div>
+
+                    <div>
+                        <label for="">End Date</label>
+                        <input type="date" v-model="form.end_date" />
+                    </div>
+
+                    <Button label="Simpan" @click="submit" />
+                </div>
+            </div>
+        </div>
+    </AppLayout>
+</template>

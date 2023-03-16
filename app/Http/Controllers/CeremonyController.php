@@ -17,50 +17,17 @@ class CeremonyController extends Controller
         return inertia('Ceremony/Index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function form()
     {
-        //
+        return inertia('Ceremony/Form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCeremonyRequest $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Ceremony $ceremony)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ceremony $ceremony)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCeremonyRequest $request, Ceremony $ceremony)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ceremony $ceremony)
     {
         //
     }
