@@ -44,5 +44,6 @@ Route::middleware([
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::get('{ceremony}/edit', 'edit')->name('edit');
+            Route::get('/export', 'export')->name('export');
         });
 });
